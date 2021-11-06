@@ -33,11 +33,13 @@ class TicketTeamDispatcherAdmin(Component):
 
     def render_admin_panel(self, req, category, page, path_info):
         #req.perm.require('TICKET_ADMIN')
-
-        #users = UserManager(self.env).get_active_users()
         web_hook = self.get_web_hook()
-
-
+        if req.method =='POST':
+            action = req.args.get('action')
+            if action == 'set-connector':
+                web_hook = req.args.get('web_hook')
+                self.set_web_hook(web_hook)
+            req.redirect(req.href.admin(category, page))
         return 'msteams_dispatcher_admin.html', {
             'web_hook': web_hook,
         }
@@ -55,3 +57,7 @@ class TicketTeamDispatcherAdmin(Component):
 
     def get_web_hook(self):
         return self.config.get('msteams-dispatcher', 'web_hook')
+
+    def set_web_hook(self, value):
+        self.config.set('msteams-dispatcher', 'web_hook', value)
+        self.config.save()
