@@ -88,14 +88,14 @@ class TicketMsTeamsNotification(Component):
                       'web_hook',
                       doc= 'The URL for a MS Teams Connector')
     def ticket_created(self, ticket):
-        print(self.web_hook)
         notify_ms_teams = ticket.values['ttmsd']
         if notify_ms_teams:
             requests.post(self.web_hook, create_payload(ticket.id, ticket.values))
 
     def ticket_changed(self, ticket, comment, author, old_values):
-        print(ticket.values)
-        requests.post(whook, change_payload(ticket.id, ticket.values))
+        notify_ms_teams = ticket.values['ttmsd']
+        if notify_ms_teams:
+            requests.post(whook, change_payload(ticket.id, ticket.values))
 
     def ticket_deleted(self, ticket):
         pass
