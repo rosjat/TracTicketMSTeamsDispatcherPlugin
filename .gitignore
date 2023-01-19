@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
+#
+# SPDX-License-Identifier: MIT
+
+build
+dist
+*.egg-info
+__pycache__/
+tests
