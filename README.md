@@ -15,7 +15,7 @@ Of course we need to define a well-formed payload for every service and so we st
 
 **_HINT:_** a proof of concept payload for discord is already in the code but not really useful at this stage.
 
-Lets get back to what we can do at this point. After the installation of the plugin you should get a new plugin under the plugins section of the trac adminstration. If we enable the plugin we get a new administration page under the ticket system section called `MS Teams Dispatcher`. There we can define our first webhook and save it. As soon as we got this we can use the checkbox `Notify MS Teams` in the ticket properties to send off a payload when a ticket is created or changed. To see what values are set in the trac.ini and the admin page read the sections further down in this document. 
+Lets get back to what we can do at this point. After the installation of the plugin you should get a new plugin under the plugins section of the trac adminstration. If we enable the plugin we get a new administration page under the ticket system section called `MS Teams Dispatcher`. There we can define our first webhook and save it. As soon as we got this we can use the checkbox `Notify MS Teams` in the ticket properties to send off a payload when a ticket is created or changed. To see what values are set in the trac.ini and the admin page read the sections further down in this document.
 
 
 
@@ -35,7 +35,7 @@ Lets get back to what we can do at this point. After the installation of the plu
   - install it in site-packages with pip (you might use a venv when using this version). The example assumes that you are in the cloned directory.
 
       ``` $ pip install . ``` or from pypi ``` $ pip install TracTicketMSTeamsDispatcher ```
-    
+
 
   - reload trac
 
@@ -55,7 +55,7 @@ trac.ini settings
 
  there will be a section under Plugins to enable/disable the plugin. If enabled you get a subsection `MS Teams Dispatcher` under section `Ticket`.
 
- In `MS Teams Dispatcher` you can set a values for a web hook and save it. You can also add or delete a webhook if you dont want to send payloads to it. 
+ In `MS Teams Dispatcher` you can set a values for a web hook and save it. You can also add or delete a webhook if you dont want to send payloads to it.
 
  TODO / Features
  ----------------
