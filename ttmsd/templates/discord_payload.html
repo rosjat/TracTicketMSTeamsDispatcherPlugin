@@ -1,0 +1,46 @@
+{#
+	SPDX-License-Identifier: LicenseRef-Trac
+
+
+	SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
+#}
+<fieldset>
+	<legend>${_(payload)}</legend>
+
+	<div class="field">
+		<label>${_("User:")}
+			<br />
+			<input type="text" id="discord_username" name="discord_username"  value="${payload.username}"
+		   size="100"/>
+		</label>
+	</div>
+
+	<div class="field">
+		<label>${_("Content:")}
+			<br />
+			<textarea id="discord_content" name="discord_content" rows="5" cols="100">${payload.content}</textarea>
+		</label>
+	</div>
+
+	<fieldset>
+		<legend>${_("Embed:")}</legend>
+		<div class="field">
+			# for embed in payload.embeds
+				<label>${_("Title:")}
+					<input type="text" id="discord_embed_title" name="discord_embed_title" value="${embed.title}" size="50"/>
+				</label>
+				<label>${_("Description:")}
+					<select name="discord_embed_description" >
+						# for preset in presets
+							# if preset == embed.description
+							<option value="${preset}" SELECTED>${preset}</option>
+							# else
+							<option value="${preset}" >${preset}</option>
+							# endif
+						# endfor
+					</select>
+				</label>
+			# endfor
+		</div>
+	</fieldset>
+</fieldset>

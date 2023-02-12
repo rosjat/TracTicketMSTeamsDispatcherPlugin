@@ -1,0 +1,53 @@
+{#
+SPDX-License-Identifier: LicenseRef-Trac
+
+
+SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
+#}
+
+# extends 'admin.html'
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		# block admintitle
+		${_("MS Teams Dispatcher Settings")}
+		# endblock admintitle
+	</title>
+</head>
+
+<body>
+	# block adminpanel
+	<form id="ttmsd-payload-settings" method="post" action="">
+		<div id="payload_container" class="container">
+			<h2>${_("Webhook Dispatcher Payload Settings")}</h2>
+			${jmacros.form_token_input()}
+			# for payload in payloads
+			# set payload_id = payload.id
+			# set payload_type = payload.type
+			# set payload_webhook_type = payload.webhook_type
+			# set teams_themecolor_id = 'teams_%s_themeColor' % (payload_id)
+			# set teams_summary_id = 'teams_%s_summary' % (payload_id)
+			# set teams_type_id = 'teams_%s_payloadtype' % (payload_id)
+			# set teams_whtype_id = 'teams_%s_webhooktype' % (payload_id)
+			# if payload.webhook_type == 1
+			# include 'teams_payload.html'
+			# endif
+			# if payload.webhook_type == 2
+			# include 'discord_payload.html'
+			# endif
+			<br />
+			# endfor
+			<div>
+				<input type="hidden" name="apply-action" value="set-connector" />
+				<!-- button type="button" id="btn_add_web_hook" onclick="">${_('Add')}</Button -->
+				<button class="ttmsd-btn" type="submit" id="btn_apply_changes">${_('Apply changes')}</button>
+			</div>
+		</div>
+	</form>
+	# endblock adminpanel
+</body>
+
+</html>

@@ -1,71 +1,74 @@
 {#
-  SPDX-License-Identifier: LicenseRef-Trac
+SPDX-License-Identifier: LicenseRef-Trac
 
 
-  SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
+SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
 #}
 
 # extends 'admin.html'
 
-	<!DOCTYPE html>
-	<html>
-	  <head>
-	    <title>
-	      # block admintitle
-	      ${_("MS Teams Dispatcher Settings")}
-	      # endblock admintitle
-	    </title>
-		<script type="text/javascript" src="ttmsd.js"></script>
-	  </head>
-	  <body>
-	    # block adminpanel
-	    <h2>${_("MS Teams Dispatcher Settings")}</h2>
-	    <form class="mod" id="ttmsd-settings" method="post" action="">
-			<div id="web_hook_container">
-	      ${jmacros.form_token_input()}
-		  # for web_hook in web_hooks
-		  	# set wh_url_id = 'web_hook_url_%s' % web_hook.id
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		# block admintitle
+		${_("MS Teams Dispatcher Settings")}
+		# endblock admintitle
+	</title>
+	<script type="text/javascript" src="ttmsd.js"></script>
+</head>
+
+<body>
+	# block adminpanel
+	<h2>${_("Webhook Dispatcher Settings")}</h2>
+	<form class="mod" id="ttmsd-settings" method="post" action="">
+		<div id="web_hook_container">
+			<input type="hidden" name="webhook_delete_list" id="webhook_delete_list" value="" />
+			${jmacros.form_token_input()}
+			# for web_hook in web_hooks
+			# set wh_url_id = 'web_hook_url_%s' % web_hook.id
 			# set wh_name_id = 'web_hook_name_%s' % web_hook.id
 			# set wh_type_id = 'web_hook_type_%s' % web_hook.id
-			  <fieldset>
-				  <legend>${_("Settings")}</legend>
-				  <div class="field">
-					  <label>${_("Connector Name:")}<br />
-						<input type="text" id="${wh_name_id}" name="${wh_name_id}" value="${web_hook.name}"
-						size="48"/>
-					</label>
-					<div class="field">
-	          <label>${_("Connector URL:")}<br />
-	            <input type="text" id="${wh_url_id}" name="${wh_url_id}" value="${web_hook.url}"
-	                   size="48"/>
-					</label>
-					<div class="field">
-						<label>${_("Connector Typ:")}<br />
-					<select name="${wh_type_id}" >
+			<div class="ttmsd-fieldset">
+				<div class="ttmsd-py-1 ttmsd-fieldset-legend ttmsd-bg-heading">${_("Settings")}</div>
+				<div class="ttmsd-input-group ttmsd-p-1">
+					<label class="ttmsd-input-group-text">${_("Connector Name:")}</label>
+					<input type="text" class="ttmsd-b-1" id="${wh_name_id}" name="${wh_name_id}"
+						value="${web_hook.name}" size="48" />
+				</div>
+				<div class="ttmsd-input-group ttmsd-p-1">
+					<label class="ttmsd-input-group-text">${_("Connector URL:")}</label>
+					<input type="text" class="ttmsd-b-1" id="${wh_url_id}" name="${wh_url_id}" value="${web_hook.url}"
+						size="48" />
+				</div>
+				<div class="ttmsd-input-group ttmsd-p-1">
+					<label class="ttmsd-input-group-text">${_("Connector Typ:")}</label>
+					<select name="${wh_type_id}">
 						# for wh_type in web_hook_types
-							# if wh_type == web_hook.type
-							<option value="${wh_type}" SELECTED>${wh_type}</option>
-							# else
-							<option value="${wh_type}" >${wh_type}</option>
-							# endif
-							# endfor
-						</select>
-					</label>
+						# if wh_type.id == web_hook.type
+						<option value="${wh_type.id}" SELECTED>${wh_type.name}</option>
+						# else
+						<option value="${wh_type.id}">${wh_type.name}</option>
+						# endif
+						# endfor
+					</select>
 				</div>
-				<div class="buttons">
-					<input type="hidden" name="action-${web_hook.id}" value="delete-${web_hook.id}" />
-					<Button type="button" id="delete-button-${web_hook.id}" onclick="remove_web_hook(this.id)">${_('delete')}</Button>
-				</div>
-			</fieldset>
+				<input type="hidden" name="action-${web_hook.id}" value="delete-${web_hook.id}" />
+				<Button type="button" class="ttmsd-btn" id="delete-button-${web_hook.id}"
+					onclick="remove_web_hook(this.id,'webhook_delete_list',${web_hook.id})">${_('delete')}</Button>
+			</div>
+			<br />
 			# endfor
 		</div>
-	      <div class="buttons">
+		<div class="buttons">
 			<input type="hidden" name="apply-action" value="set-connector" />
-			<button type="button" id="btn_add_web_hook" onclick="add_web_hook()">${_('Add')}</Button>
-	        <button type="submit" id="btn_apply_changes">${_('Apply changes')}</button>
+			<button type="button" class="ttmsd-btn" id="btn_add_web_hook"
+				onclick="add_web_hook(${json_presets})">${_('Add')}</Button>
+			<button type="submit" class="ttmsd-btn" id="btn_apply_changes">${_('Apply changes')}</button>
 		</div>
 	</form>
-	    # endblock adminpanel
-	  </body>
+	# endblock adminpanel
+</body>
 
-	</html>
+</html>

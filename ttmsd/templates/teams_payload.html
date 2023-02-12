@@ -1,0 +1,136 @@
+{#
+SPDX-License-Identifier: LicenseRef-Trac
+
+
+SPDX-FileCopyrightText: 2022 The TracTicketMSTeamsDispatcherPlugin Authors
+#}
+<div class="ttmsd-fieldset">
+	<div class="ttmsd-py-1 ttmsd-fieldset-legend ttmsd-bg-heading">${_("Payload")}</div>
+	<div class="ttmsd-input-group ttmsd-p-1">
+		<span class="ttmsd-input-group-text">${_("Webhook Type:")}</span>
+		<select name="${teams_whtype_id}">
+			# for wht in wh_types
+			# if wht.id == payload.webhook_id
+			<option value="${wht.id}" SELECTED>${wht.name}</option>
+			# else
+			<option value="${wht.id}">${wht.name}</option>
+			# endif
+			# endfor
+		</select>
+	</div>
+	<div class="ttmsd-input-group ttmsd-p-1">
+		<span class="ttmsd-input-group-text">${_("Type:")}</span>
+		<select name="${teams_type_id}">
+			# for t in types
+			# if t.id == payload.type
+			<option value="${t.id}" SELECTED>${t.name}</option>
+			# else
+			<option value="${t.id}">${t.name}</option>
+			# endif
+			# endfor
+		</select>
+	</div>
+	<div class="ttmsd-input-group ttmsd-p-1">
+		<label class="ttmsd-input-group-text" for="${teams_themecolor_id}">${_("Color:")}</label>
+		<input type="color" class="ttmsd-b-1" id="${teams_themecolor_id}" name="${teams_themecolor_id}"
+			value="#${payload.themeColor}" size="100" />
+	</div>
+	<div class="ttmsd-input-group ttmsd-p-1">
+		<span class="ttmsd-input-group-text">${_("Summary:")}</span>
+		<select name="${teams_summary_id}">
+			# for preset in presets
+			# if preset.id == payload.summary
+			<option value="${preset.id}" SELECTED>${preset.name}</option>
+			# else
+			<option value="${preset.id}">${preset.name}</option>
+			# endif
+			# endfor
+		</select>
+	</div>
+
+	# for section in payload.sections
+	# set section_id = section.id
+	# set teams_section_activityTitle_id = 'teams_%s_section_activityTitle_%s' % (payload_id, section_id)
+	# set teams_section_activitySubtitle_id = 'teams_%s_section_activitySubtitle_%s' % (payload_id, section_id)
+	# set teams_section_activityImage_id = 'teams_%s_section_activityImage_%s' % (payload_id, section_id)
+	# set teams_section_markdown_id = 'teams_%s_section_markdown_%s' % (payload_id, section_id)
+	# set teams_section_facts_container_id = 'teams_%s_section_facts_container_%s' % (payload_id, section_id)
+	<div class="ttmsd-container ttmsd-p-1">
+		<div class="ttmsd-fieldset">
+			<div class="ttmsd-fieldset-legend ttmsd-bg-heading">${_("Section %s" % loop.index)}</div>
+			<div class="ttmsd-input-group ttmsd-p-1">
+				<span class="ttmsd-input-group-text">${_("Title:")}</span>
+				<select class="" name="${teams_section_activityTitle_id}">
+					# for preset in presets
+					# if preset.id == section.activityTitle
+					<option value="${preset.id}" SELECTED>${preset.name}</option>
+					# else
+					<option value="${preset.id}">${preset.name}</option>
+					# endif
+					# endfor
+				</select>
+			</div>
+			<div class="ttmsd-input-group ttmsd-p-1">
+				<span class="ttmsd-input-group-text">${_("Subtitle:")}</span>
+				<select name="${teams_section_activitySubtitle_id}">
+					# for preset in presets
+					# if preset.id == section.activitySubtitle
+					<option value="${preset.id}" SELECTED>${preset.name}</option>
+					# else
+					<option value="${preset.id}">${preset.name}</option>
+					# endif
+					# endfor
+				</select>
+			</div>
+			<div class="ttmsd-input-group ttmsd-p-1">
+				<span class="ttmsd-input-group-text">${_("Image:")}</span>
+				<input type="text" class="ttmsd-b-1" id="${teams_section_activityImage_id}"
+					name="${teams_section_activityImage_id}" value="${section.activityImage}" size="50" />
+			</div>
+			<div class="ttmsd-p-1">
+				# if section.markdown == True
+				<input class="form-check-input" type="checkbox" id="${teams_section_markdown_id}"
+					name="${teams_section_markdown_id}" value="True" size="50" checked />
+				# else
+				<input class="form-check-input" type="checkbox" id="${teams_section_markdown_id}"
+					name="${teams_section_markdown_id}" value="True" size="50" />
+				# endif
+				<label class="form-check-label" for="${teams_section_markdown_id}">${_("Markdown ")}</label>
+			</div>
+			<div class="ttmsd-legend ttmsd-bg-heading ttmsd-bt-1">${_("Fact for Section %s" % loop.index)}</div>
+			<div class="ttmsd-container" id="${teams_section_facts_container_id}">
+				# for fact in section.facts
+				# set fact_id = fact.id
+				# set teams_fact_name_id = 'teams_%s_fact_name_%s_%s' % (payload_id, section_id, fact_id)
+				# set teams_fact_value_id = 'teams_%s_fact_value_%s_%s' % (payload_id, section_id, fact_id)
+				# set teams_fact_delete_id = 'teams_%s_fact_delete_%s_%s' % (payload_id, section_id, fact_id)
+				<div class="ttmsd-flex-row ">
+					<div class="ttmsd-input-group ttmsd-p-1">
+						<label class="ttmsd-input-group-text" for="${teams_fact_name_id}">${_("Name:")}</label>
+						<input class="ttmsd-b-1" type="text" id="${teams_fact_name_id}" name="${teams_fact_name_id}"
+							value="${fact.name}" size="50" />
+					</div>
+					<div class="ttmsd-input-group ttmsd-p-1">
+						<label class="ttmsd-input-group-text" for="${teams_fact_value_id}">${_("Value:")}</label>
+						<select class="" name="${teams_fact_value_id}">
+							# for preset in presets
+							# if preset.id == fact.value
+							<option value="${preset.id}" SELECTED>${preset.name}</option>
+							# else
+							<option value="${preset.id}">${preset.name}</option>
+							# endif
+							# endfor
+						</select>
+					</div>
+					<Button type="button" class="ttmsd-btn" id="${teams_fact_delete_id}"
+						onclick="remove_fact(this.id)">${_('delete')}</Button>
+				</div>
+				# endfor
+			</div>
+			<button type="button" class="ttmsd-btn" id="btn_add_teams_change_fact"
+				onclick="add_fact(${teams_section_facts_container_id},${json_presets}, false)">${_('Add
+				Fact')}</Button>
+		</div>
+	</div>
+	# endfor
+</div>

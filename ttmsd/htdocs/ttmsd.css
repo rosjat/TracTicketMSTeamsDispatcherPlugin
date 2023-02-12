@@ -1,0 +1,131 @@
+/*
+  SPDX-License-Identifier: LGPL-2.1-or-later
+
+
+  SPDX-FileCopyrightText: 2023 The TracTicketMSTeamsDispatcherPlugin Authors
+*/
+:root {
+	--ttmsd-primary:#ededdb;
+	--ttmsd-primary-hover: #fafae9;
+
+}
+select, button, input[type=text], span, label {
+	border-radius: 0;
+	border-color: transparent;
+	padding: 0;
+	margin: 0;
+	background: white;
+	outline: none;
+}
+
+input[type=color] {
+	height: auto;
+	margin: -0.2px;
+	border-color: transparent;
+	background: white;
+	padding: 0;
+}
+.ttmsd-b-1 {
+	border: 1px solid black !important;
+
+}
+button.ttmsd-btn {
+	padding: 0.5em;
+	margin: 0.5em;
+	background-color: var(--ttmsd-primary);
+	text-align: center;
+}
+button.ttmsd-btn:hover {
+	background-color: var(--ttmsd-primary-hover);
+}
+button.ttmsd-btn:active {
+	background-color: var(--ttmsd-primary);
+}
+.ttmsd-fieldset {
+	border: 1px solid #000000;
+	border-radius: .4em;
+	/*
+	background: #F7F7F0;
+	box-shadow: .1em .1em 1em 0 #E7E7E7 inset;
+	*/
+	padding: -15px;
+   }
+
+
+.ttmsd-fieldset-legend {
+	display: inline-block;
+	border-bottom: 1px solid black;
+	border-top-left-radius: .4em;
+	border-top-right-radius: .4em;
+    width: 100%;
+    padding-inline-start: inherit;
+	text-align: center;
+    font-size: inherit;
+    font-weight: bold;
+}
+
+.ttmsd-legend {
+	display: inline-block;
+	border-bottom: 1px solid black;
+    width: 100%;
+    padding-inline-start: inherit;
+	text-align: center;
+    font-size: inherit;
+    font-weight: bold;
+}
+.ttmsd-input-group {
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: auto;
+
+}
+
+.ttmsd-input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--ttmsd-primary-hover);
+    border-style: solid;
+	border-color:  black;
+	border-left-width: 1px;
+	border-top-width: 1px;
+	border-right-width:  0px;
+	border-bottom-width: 1px;
+	min-width: 5em;
+}
+
+.ttmsd-bt-1 {
+	border-top: 1px solid;
+
+}
+.ttmsd-py-1 {
+	padding-bottom: 0.1em;
+	padding-top: 0.1em;
+
+}
+.ttmsd-p-1 {
+	padding: 0.5em;
+}
+
+.ttmsd-container {
+	padding: -15px;
+}
+.ttmsd-bg-red {
+	background-color: red;
+}
+.ttmsd-bg-heading
+{
+	background-color: var(--ttmsd-primary);
+}
+.ttmsd-flex-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: left;
+	direction: ltr;
+}
